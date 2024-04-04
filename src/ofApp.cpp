@@ -43,16 +43,17 @@ void ofApp::draw() {
         drawMode4(0, 0, 10 * 1000);
     }    break;
     case '5': {
-        // Koch SnowFlake
+        // Koch SnowFlake // Este se dibuja en el file de SnowFlake.cpp
         SnowFlake().draw();
     }   break;
     case '6': {
-        //3d Fractal
+        //3d Fractal //Estese dibuja en el file de Fractal3D.cpp
         Fractal3D(&cam).draw(map<string, float> {{"n", 3}, {"scale", 100}});
     }   break;
     }
 }
 
+//Drawing method for Circle
 void ofApp::drawMode1(float x, float y, float r, int n) {
     if (n == 0) return;
 
@@ -73,6 +74,7 @@ void ofApp::drawMode1(float x, float y, float r, int n) {
     drawMode1(x + r * cos(angle6), y + r * sin(angle6), delta, n - 1);
 }
 
+//Drawing method for Tree
 void ofApp::drawMode2(float x, float y, int n, float length, float rad) {
     if (n == 0) return;
 
@@ -85,6 +87,7 @@ void ofApp::drawMode2(float x, float y, int n, float length, float rad) {
     drawMode2(x2, y2, n - 1, 0.7 * length, rad - 0.2 * PI);
 }
 
+//Drawing method for Sierpinski Triangle
 void ofApp::drawMode3(float x, float y, float size, int n) {
     if (n == 0) {
         return;
@@ -100,6 +103,7 @@ void ofApp::drawMode3(float x, float y, float size, int n) {
     drawMode3((a.x + b.x) / 2, (a.y + b.y) / 2, size / 2, n - 1);
 }
 
+//Drawing method for Barnsley Fern
 void ofApp::drawMode4(float x, float y, float n) {
     if (n == 0) return;
 
