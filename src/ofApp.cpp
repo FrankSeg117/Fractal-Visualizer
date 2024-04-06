@@ -26,21 +26,21 @@ void ofApp::draw() {
         // Circle
         float r = 0.31 * ofGetHeight();
         angle += 0.01;
-        drawMode1(ofGetWidth() / 2, ofGetHeight() / 2, r, 3);
+        drawMode1(ofGetWidth() / 2, ofGetHeight() / 2, r, dm1depth);
     } break;
     case '2': {
         // Tree
         float length = 0.31 * ofGetHeight();
-        drawMode2(ofGetWidth() / 2, ofGetHeight() - 20, 10, length, 1.5 * PI);
+        drawMode2(ofGetWidth() / 2, ofGetHeight() - 20, dm2depth, length, 1.5 * PI);
     } break;
     case '3': {
         // Sierpinski Triangle
         float size = 0.88 * ofGetHeight();
-        drawMode3((ofGetWidth() - size) / 2, ofGetHeight() / 2 - 0.4 * size, size, 7);
+        drawMode3((ofGetWidth() - size) / 2, ofGetHeight() / 2 - 0.4 * size, size, dm3depth);
     } break;
     case '4': {
         // Barnsley Fern
-        drawMode4(0, 0, 10 * 1000);
+        drawMode4(0, 0, dm4depth * 1000);
     }    break;
     case '5': {
         // Koch SnowFlake // Este se dibuja en el file de SnowFlake.cpp
@@ -133,6 +133,35 @@ void ofApp::drawMode4(float x, float y, float n) {
 void ofApp::keyPressed(int key) {
     if (key >= '1' && key <= '6'){
         mode = key;
+    }
+    if(key == OF_KEY_RIGHT){
+        if(mode == '1' && dm1depth<5){
+            dm1depth++;
+        }
+        if(mode == '2' && dm2depth<15){
+            dm2depth++;
+        }
+        if(mode == '3' && dm3depth<10){
+            dm3depth++;
+        }
+        if(mode == '4' && dm4depth<50){
+            dm4depth++;
+        }               
+    }
+    //This will decrease 
+    if(key == OF_KEY_LEFT){ 
+        if(mode == '1' && dm1depth>1){
+            dm1depth--;
+        }
+        if(mode == '2' && dm2depth>1){
+            dm2depth--;
+        }
+        if(mode == '3' && dm3depth>1){
+            dm3depth--;
+        }
+        if(mode == '4' && dm4depth>5){
+            dm4depth--;
+        }      
     }
 }
 

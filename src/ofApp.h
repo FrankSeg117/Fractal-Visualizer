@@ -31,6 +31,15 @@ class ofApp : public ofBaseApp {
     void drawMode3(float x, float y, float size, int n);
     void drawMode4(float x, float y, float n);
 
+    int dm1depth = 3;
+    int dm2depth = 10;
+    int dm3depth = 7;
+    int dm4depth = 10;
+    int dm5depth = 3;
+    int dm6depth = 3;
+    
+
+
     ofEasyCam cam;
     ofTrueTypeFont text;
     ofTrueTypeFont dataText;
