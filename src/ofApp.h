@@ -41,7 +41,7 @@ class ofApp : public ofBaseApp {
     int dm6depth = 3;
     
     SnowFlake lanieve;
-    // Fractal3D Triangulitos;
+    Fractal3D Triangulitos;
 
     ofEasyCam cam;
     ofTrueTypeFont text;
