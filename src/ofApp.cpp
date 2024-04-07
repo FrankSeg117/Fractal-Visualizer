@@ -85,7 +85,10 @@ void ofApp::drawMode1(float x, float y, float r, int n, int colorindex) {
 //Drawing method for Tree
 void ofApp::drawMode2(float x, float y, int n, float length, float rad, int colorindex) {
     if (n == 0) return;             //0                 //1                 2                   3               4               
-    vector<ofColor> colores = {ofColor::brown, ofColor::rosyBrown, ofColor::burlyWood, ofColor::sandyBrown, ofColor::olive,ofColor::green, ofColor::limeGreen, ofColor::forestGreen, ofColor::seaGreen, ofColor::springGreen,ofColor::paleGreen,ofColor::darkGreen,ofColor::yellow,ofColor::purple,ofColor::greenYellow,ofColor::lightGoldenRodYellow,ofColor::lime,ofColor::lemonChiffon};
+    vector<ofColor> colores = {ofColor::brown, ofColor::rosyBrown, ofColor::burlyWood, ofColor::sandyBrown, ofColor::olive,
+                               ofColor::green, ofColor::limeGreen, ofColor::forestGreen, ofColor::seaGreen, ofColor::springGreen,
+                               ofColor::paleGreen,ofColor::darkGreen,ofColor::yellow,ofColor::purple,ofColor::greenYellow,
+                               ofColor::lightGoldenRodYellow,ofColor::lime,ofColor::lemonChiffon};
     // if(colorindex>=colores.size()){
     //     colorindex=4;
     // }
