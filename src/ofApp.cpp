@@ -26,12 +26,12 @@ void ofApp::draw() {
         // Circle
         float r = 0.31 * ofGetHeight();
         angle += 0.01;
-        drawMode1(ofGetWidth() / 2, ofGetHeight() / 2, r, dm1depth);
+        drawMode1(ofGetWidth() / 2, ofGetHeight() / 2, r, dm1depth,0);
     } break;
     case '2': {
         // Tree
         float length = 0.31 * ofGetHeight();
-        drawMode2(ofGetWidth() / 2, ofGetHeight() - 20, dm2depth, length, 1.5 * PI);
+        drawMode2(ofGetWidth() / 2, ofGetHeight() - 20, dm2depth, length, 1.5 * PI,0);
     } break;
     case '3': {
         // Sierpinski Triangle
@@ -58,37 +58,46 @@ void ofApp::draw() {
 }
 
 //Drawing method for Circle
-void ofApp::drawMode1(float x, float y, float r, int n) {
+void ofApp::drawMode1(float x, float y, float r, int n, int colorindex) {
     if (n == 0) return;
+    vector<ofColor> colores = {ofColor::blue, ofColor::red, ofColor::green, ofColor::yellow, ofColor::cyan};
 
+    ofSetColor(colores[colorindex]);
+     
     int delta = r * 0.35;
     ofDrawCircle(x, y, r);
-
+    ofSetColor(ofColor::white); //reset the color back to white
+    
     float angle1 = angle;
     float angle2 = PI / 3 + angle;
     float angle3 = PI + angle;
     float angle4 = 2 * PI / 3 + angle;
     float angle5 = 4 * PI / 3 + angle;
     float angle6 = 5 * PI / 3 + angle;
-    drawMode1(x + r * cos(angle1), y + r * sin(angle1), delta, n - 1);
-    drawMode1(x + r * cos(angle2), y + r * sin(angle2), delta, n - 1);
-    drawMode1(x + r * cos(angle3), y + r * sin(angle3), delta, n - 1);
-    drawMode1(x + r * cos(angle4), y + r * sin(angle4), delta, n - 1);
-    drawMode1(x + r * cos(angle5), y + r * sin(angle5), delta, n - 1);
-    drawMode1(x + r * cos(angle6), y + r * sin(angle6), delta, n - 1);
+    drawMode1(x + r * cos(angle1), y + r * sin(angle1), delta, n - 1,colorindex+1);
+    drawMode1(x + r * cos(angle2), y + r * sin(angle2), delta, n - 1,colorindex+1);
+    drawMode1(x + r * cos(angle3), y + r * sin(angle3), delta, n - 1,colorindex+1);
+    drawMode1(x + r * cos(angle4), y + r * sin(angle4), delta, n - 1,colorindex+1);
+    drawMode1(x + r * cos(angle5), y + r * sin(angle5), delta, n - 1,colorindex+1);
+    drawMode1(x + r * cos(angle6), y + r * sin(angle6), delta, n - 1,colorindex+1);
 }
 
 //Drawing method for Tree
-void ofApp::drawMode2(float x, float y, int n, float length, float rad) {
-    if (n == 0) return;
-
+void ofApp::drawMode2(float x, float y, int n, float length, float rad, int colorindex) {
+    if (n == 0) return;             //0                 //1                 2                   3               4               
+    vector<ofColor> colores = {ofColor::brown, ofColor::rosyBrown, ofColor::burlyWood, ofColor::sandyBrown, ofColor::olive,ofColor::green, ofColor::limeGreen, ofColor::forestGreen, ofColor::seaGreen, ofColor::springGreen,ofColor::paleGreen,ofColor::darkGreen,ofColor::yellow,ofColor::purple,ofColor::greenYellow,ofColor::lightGoldenRodYellow,ofColor::lime,ofColor::lemonChiffon};
+    // if(colorindex>=colores.size()){
+    //     colorindex=4;
+    // }
     float x2 = x + length * cos(rad);
     float y2 = y + length * sin(rad);
 
+    ofSetColor(colores[colorindex]); 
     ofDrawLine(x, y, x2, y2);
+    ofSetColor(ofColor::white); //reset the color back to white
 
-    drawMode2(x2, y2, n - 1, 0.7 * length, rad + 0.2 * PI);
-    drawMode2(x2, y2, n - 1, 0.7 * length, rad - 0.2 * PI);
+    drawMode2(x2, y2, n - 1, 0.7 * length, rad + 0.2 * PI,colorindex+1);
+    drawMode2(x2, y2, n - 1, 0.7 * length, rad - 0.2 * PI,colorindex+1);
 }
 
 //Drawing method for Sierpinski Triangle
