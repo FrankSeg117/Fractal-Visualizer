@@ -13,6 +13,7 @@ class SnowFlake {
     glm::vec2 start;
     glm::vec2 end;
 
+    int SFdrawdepth = 5;
   public:
     SnowFlake();
     SnowFlake(glm::vec2 start, glm::vec2 end);
@@ -21,6 +22,9 @@ class SnowFlake {
     glm::vec2 getEnd() const { return end; }
     void setStart(glm::vec2 start) { this->start = start; }
     void setEnd(glm::vec2 end) { this->end = end; }
+
+    void setDepth(int depth){this->SFdrawdepth=depth;}
+    int getDepth(){return this->SFdrawdepth;}
 
     void draw();
     void draw(int n, SnowFlake *flake);

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <cmath>
+#include "SnowFlake.h"
+#include "Fractal3D.h"
 
 #include "ofMain.h"
 
@@ -38,7 +40,8 @@ class ofApp : public ofBaseApp {
     int dm5depth = 3;
     int dm6depth = 3;
     
-
+    SnowFlake lanieve;
+    // Fractal3D Triangulitos;
 
     ofEasyCam cam;
     ofTrueTypeFont text;

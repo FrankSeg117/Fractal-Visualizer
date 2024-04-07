@@ -1,6 +1,5 @@
 #include "ofApp.h"
-#include "SnowFlake.h"
-#include "Fractal3D.h"
+
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -8,6 +7,7 @@ void ofApp::setup() {
     cam.setDistance(200);
     text.load("Fonts/fractalFont.otf",40);
     dataText.load("Fonts/fractalFont.otf",15);
+    // Triangulitos=Fractal3D(&cam);
 }
 
 //--------------------------------------------------------------
@@ -44,11 +44,14 @@ void ofApp::draw() {
     }    break;
     case '5': {
         // Koch SnowFlake // Este se dibuja en el file de SnowFlake.cpp
-        SnowFlake().draw();
+        lanieve.draw();
+        text.drawString(to_string(lanieve.getDepth()),25,120); //debug para ver si cambia depth
+
     }   break;
     case '6': {
         //3d Fractal //Estese dibuja en el file de Fractal3D.cpp
         Fractal3D(&cam).draw(map<string, float> {{"n", 3}, {"scale", 100}});
+        // Triangulitos.draw(map<string, float> {{"n", 3}, {"scale", 100}});
     }   break;
     }
 }
@@ -145,8 +148,14 @@ void ofApp::keyPressed(int key) {
             dm3depth++;
         }
         if(mode == '4' && dm4depth<50){
-            dm4depth++;
-        }               
+            dm4depth+=5;
+        }
+        if(mode == '5' && lanieve.getDepth()<6){
+            lanieve.setDepth(lanieve.getDepth()+1);
+        }
+        // if(mode == '6' && Triangulitos.getDepth()<9){
+        //     Triangulitos.setdepth(Triangulitos.getDepth()+1);
+        // }                
     }
     //This will decrease 
     if(key == OF_KEY_LEFT){ 
@@ -160,8 +169,14 @@ void ofApp::keyPressed(int key) {
             dm3depth--;
         }
         if(mode == '4' && dm4depth>5){
-            dm4depth--;
-        }      
+            dm4depth-=5;
+        }
+        if(mode == '5' && lanieve.getDepth()>1){
+            lanieve.setDepth(lanieve.getDepth()-1);
+        }
+        // if(mode == '6' && Triangulitos.getDepth()>0){
+        //     Triangulitos.setdepth(Triangulitos.getDepth()-1);
+        // }   
     }
 }
 

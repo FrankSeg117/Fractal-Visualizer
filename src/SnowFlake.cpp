@@ -15,9 +15,12 @@ void SnowFlake::draw() {
     glm::vec2 p2 = {(ofGetWidth() + size) / 2, (ofGetHeight() - size * sin(PI / 3)) / 2 + 0.15 * size};
     glm::vec2 p3 = {ofGetWidth() / 2, (ofGetHeight() + size * sin(PI / 3)) / 2 + 0.15 * size};
 
-    draw(5, new SnowFlake(p1, p2));
-    draw(5, new SnowFlake(p2, p3));
-    draw(5, new SnowFlake(p3, p1));
+    draw(SFdrawdepth, new SnowFlake(p1, p2));
+    draw(SFdrawdepth, new SnowFlake(p2, p3));
+    draw(SFdrawdepth, new SnowFlake(p3, p1));
+    // draw(3, new SnowFlake(p1, p2));
+    // draw(3, new SnowFlake(p2, p3));
+    // draw(3, new SnowFlake(p3, p1));
 }
 void SnowFlake::draw(int n, SnowFlake *flake) {
     if (n < 2)
