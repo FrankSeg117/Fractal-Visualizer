@@ -36,7 +36,7 @@ void ofApp::draw() {
     case '3': {
         // Sierpinski Triangle
         float size = 0.88 * ofGetHeight();
-        drawMode3((ofGetWidth() - size) / 2, ofGetHeight() / 2 - 0.4 * size, size, dm3depth);
+        drawMode3((ofGetWidth() - size) / 2, ofGetHeight() / 2 - 0.4 * size, size, dm3depth,0);
     } break;
     case '4': {
         // Barnsley Fern
@@ -104,32 +104,50 @@ void ofApp::drawMode2(float x, float y, int n, float length, float rad, int colo
 }
 
 //Drawing method for Sierpinski Triangle
-void ofApp::drawMode3(float x, float y, float size, int n) {
+void ofApp::drawMode3(float x, float y, float size, int n, int colorindex) {
     if (n == 0) {
         return;
     }
+    vector<ofColor> colores = {ofColor::brown, ofColor::rosyBrown, ofColor::burlyWood, ofColor::sandyBrown, ofColor::olive,
+                               ofColor::green, ofColor::limeGreen, ofColor::forestGreen, ofColor::seaGreen, ofColor::springGreen,
+                               ofColor::paleGreen,ofColor::darkGreen,ofColor::yellow,ofColor::purple,ofColor::greenYellow,
+                               ofColor::lightGoldenRodYellow,ofColor::lime,ofColor::lemonChiffon};   
 
     ofPoint a(x, y);
     ofPoint b(x + size, y);
     ofPoint c(x + size / 2, y + ((sqrt(3) * size) / 2));
 
+    ofSetColor(colores[colorindex]); 
     ofDrawTriangle(a, b, c);
+    ofSetColor(ofColor::white);
 
-    drawMode3(x, y, size / 2, n - 1);
-    drawMode3((a.x + b.x) / 2, (a.y + b.y) / 2, size / 2, n - 1);
+    drawMode3(x, y, size / 2, n - 1, colorindex+1);
+    drawMode3((a.x + b.x) / 2, (a.y + b.y) / 2, size / 2, n - 1, colorindex+1);
 }
 
 //Drawing method for Barnsley Fern
 void ofApp::drawMode4(float x, float y, float n) {
-    if (n == 0) return;
+    if (n <= 0) return;
+    int colorindex=0;
 
+    if(n>80000){
+        colorindex=0;
+    }
+    if(n>50000){
+        colorindex=4;
+    }
+    if(n>5000){
+        colorindex=7;
+    }
     float r = ofRandom(1);
 
     float px = ofMap(x, -2.1820, 2.6558, 0, ofGetWidth());
     float py = ofMap(y, 0, 9.9983, ofGetHeight(), 0);
 
     ofFill();
-    ofSetColor(ofColor::green);
+
+    ofSetColor(LoColores[colorindex]);
+    // ofSetColor(ofColor::green);
     ofDrawCircle(px, py, 0.6);
     ofSetColor(ofColor::white);
 
