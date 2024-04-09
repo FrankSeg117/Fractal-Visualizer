@@ -87,8 +87,8 @@ void ofApp::drawMode2(float x, float y, int n, float length, float rad, int colo
     if (n == 0) return;             //0                 //1                 2                   3               4               
     vector<ofColor> colores = {ofColor::brown, ofColor::rosyBrown, ofColor::burlyWood, ofColor::sandyBrown, ofColor::olive,
                                ofColor::green, ofColor::limeGreen, ofColor::forestGreen, ofColor::seaGreen, ofColor::springGreen,
-                               ofColor::paleGreen,ofColor::darkGreen,ofColor::yellow,ofColor::purple,ofColor::greenYellow,
-                               ofColor::lightGoldenRodYellow,ofColor::lime,ofColor::lemonChiffon};
+                               ofColor::paleGreen,ofColor::darkGreen,ofColor::greenYellow,ofColor::ghostWhite,ofColor::hotPink, //<-End point
+                               ofColor::lightGoldenRodYellow,ofColor::lime,ofColor::lemonChiffon}; //<-Extra locations in case of a big oof
     // if(colorindex>=colores.size()){
     //     colorindex=4;
     // }
