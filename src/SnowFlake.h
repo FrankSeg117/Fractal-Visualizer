@@ -27,11 +27,29 @@ class SnowFlake {
     int getDepth(){return this->SFdrawdepth;}
 
     void draw();
-    void draw(int n, SnowFlake *flake);
+    void draw(int n, SnowFlake *flake,int colorindex);
 
     glm::vec2 getA();
     glm::vec2 getB();
     glm::vec2 getC();
     glm::vec2 getD();
     glm::vec2 getE();
+
+vector<ofColor> colors = {
+    ofColor::blue,               
+    ofColor::cornflowerBlue,     
+    ofColor::deepSkyBlue,        
+    ofColor::dodgerBlue,         
+    ofColor::lightSkyBlue,       
+    ofColor::mediumTurquoise,
+    ofColor::skyBlue,             
+    ofColor::steelBlue,           
+    ofColor::royalBlue,           
+    ofColor::powderBlue,          
+    ofColor::lightSteelBlue,      
+    ofColor::turquoise             
+};
+
+
+
 };

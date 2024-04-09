@@ -15,21 +15,25 @@ void SnowFlake::draw() {
     glm::vec2 p2 = {(ofGetWidth() + size) / 2, (ofGetHeight() - size * sin(PI / 3)) / 2 + 0.15 * size};
     glm::vec2 p3 = {ofGetWidth() / 2, (ofGetHeight() + size * sin(PI / 3)) / 2 + 0.15 * size};
 
-    draw(SFdrawdepth, new SnowFlake(p1, p2));
-    draw(SFdrawdepth, new SnowFlake(p2, p3));
-    draw(SFdrawdepth, new SnowFlake(p3, p1));
+    draw(SFdrawdepth, new SnowFlake(p1, p2),0);
+    draw(SFdrawdepth, new SnowFlake(p2, p3),0);
+    draw(SFdrawdepth, new SnowFlake(p3, p1),0);
     // draw(3, new SnowFlake(p1, p2));
     // draw(3, new SnowFlake(p2, p3));
     // draw(3, new SnowFlake(p3, p1));
 }
-void SnowFlake::draw(int n, SnowFlake *flake) {
-    if (n < 2)
+void SnowFlake::draw(int n, SnowFlake *flake,int colorindex) {
+    if (n < 2){
+        ofSetColor(colors[colorindex]);
         ofDrawLine(flake->getStart(), flake->getEnd());
+        ofSetColor(ofColor::white);
+        }
+        
     else {
-        draw(n - 1, new SnowFlake(flake->getA(), flake->getB()));
-        draw(n - 1, new SnowFlake(flake->getB(), flake->getC()));
-        draw(n - 1, new SnowFlake(flake->getC(), flake->getD()));
-        draw(n - 1, new SnowFlake(flake->getD(), flake->getE()));
+        draw(n - 1, new SnowFlake(flake->getA(), flake->getB()), colorindex);
+        draw(n - 1, new SnowFlake(flake->getB(), flake->getC()), colorindex+1);
+        draw(n - 1, new SnowFlake(flake->getC(), flake->getD()), colorindex+1);
+        draw(n - 1, new SnowFlake(flake->getD(), flake->getE()), colorindex);
     }
     delete flake;
 }

@@ -33,10 +33,20 @@ class ofApp : public ofBaseApp {
     void drawMode3(float x, float y, float size, int n, int colorindex);
     void drawMode4(float x, float y, float n);
 
-    vector<ofColor> LoColores = {ofColor::brown, ofColor::rosyBrown, ofColor::burlyWood, ofColor::sandyBrown, ofColor::olive,
-                               ofColor::green, ofColor::limeGreen, ofColor::forestGreen, ofColor::seaGreen, ofColor::springGreen,
-                               ofColor::paleGreen,ofColor::darkGreen,ofColor::yellow,ofColor::purple,ofColor::greenYellow,
-                               ofColor::lightGoldenRodYellow,ofColor::lime,ofColor::lemonChiffon};
+    vector<ofColor> LoColores = {
+        ofColor::red,            // 
+        ofColor::darkBlue,           // 
+        ofColor::green,          // 
+        ofColor::lightGoldenRodYellow,         // 
+        ofColor::cyan,           // 
+        ofColor::magenta,        // 
+        ofColor::orange,         // 
+        ofColor::purple,         // 
+        ofColor::chartreuse,     // 
+        ofColor::aquamarine,     // 
+        ofColor::turquoise,      // 
+        ofColor::darkSlateBlue            // 
+    };
 
     int dm1depth = 3;
     int dm2depth = 10;

@@ -130,14 +130,32 @@ void ofApp::drawMode4(float x, float y, float n) {
     if (n <= 0) return;
     int colorindex=0;
 
-    if(n>80000){
+    if(n>45000){
         colorindex=0;
     }
-    if(n>50000){
+    else if(n>40000){
         colorindex=4;
     }
-    if(n>5000){
+    else if(n>35000){
+        colorindex=5;
+    }
+    else if(n>30000){
+        colorindex=6;
+    }
+    else if(n>25000){
         colorindex=7;
+    }
+    else if(n>20000){
+        colorindex=7;
+    }
+    else if(n>15000){
+        colorindex=8;
+    }
+    else if(n>10000){
+        colorindex=9;
+    }
+    else if(n>5000){
+        colorindex=10;
     }
     float r = ofRandom(1);
 
