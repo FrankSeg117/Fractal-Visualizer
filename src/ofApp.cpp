@@ -30,9 +30,13 @@ void ofApp::draw() {
         }
     } break;
     case '2': {
-        // Tree
+        // Tree //Default length is 0.31
         float length = 0.31 * ofGetHeight();
+
         drawMode2(ofGetWidth() / 2, ofGetHeight() - 20, dm2depth, length, 1.5 * PI,0);
+        drawMode2(ofGetWidth() / 2 + 700, ofGetHeight() + 100, dm2depth, length/2, 1.5 * PI,0);
+        drawMode2(ofGetWidth() / 2 - 700, ofGetHeight() + 100, dm2depth, length/2, 1.5 * PI,0);
+   
         if(debug){
             text.drawString("Tree Fractal",25,60);
         }
