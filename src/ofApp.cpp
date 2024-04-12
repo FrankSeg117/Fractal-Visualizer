@@ -6,7 +6,7 @@ void ofApp::setup() {
     cam.setUpAxis({0,0,1});
     cam.setDistance(200);
     text.load("Fonts/fractalFont.otf",40);
-    dataText.load("Fonts/fractalFont.otf",15);
+    dataText.load("Fonts/fractalFont.otf",23);
     Triangulitos.setcam(&cam); //Se le asigna al fractal3d la cam creada
 }
 
@@ -18,8 +18,6 @@ void ofApp::update() {
 void ofApp::draw() {
     ofBackgroundGradient(ofColor(65), ofColor(0), OF_GRADIENT_BAR);
 
-    text.drawString("(Insert Fractal Name Here)",25,60);
-
     ofNoFill();
     switch (mode) {
     case '1': {
@@ -27,33 +25,63 @@ void ofApp::draw() {
         float r = 0.31 * ofGetHeight();
         angle += 0.01;
         drawMode1(ofGetWidth() / 2, ofGetHeight() / 2, r, dm1depth,0);
+        if(debug){
+            text.drawString("Circle Fractal",25,60);
+        }
     } break;
     case '2': {
         // Tree
         float length = 0.31 * ofGetHeight();
         drawMode2(ofGetWidth() / 2, ofGetHeight() - 20, dm2depth, length, 1.5 * PI,0);
+        if(debug){
+            text.drawString("Tree Fractal",25,60);
+        }
     } break;
     case '3': {
         // Sierpinski Triangle
         float size = 0.88 * ofGetHeight();
         drawMode3((ofGetWidth() - size) / 2, ofGetHeight() / 2 - 0.4 * size, size, dm3depth,0);
+        if(debug){
+            text.drawString("Sierpinski Triangle Fractal",25,60);
+        }
     } break;
     case '4': {
         // Barnsley Fern
         drawMode4(0, 0, dm4depth * 1000);
+        if(debug){
+            text.drawString("Barnsley Fern Fractal",25,60);
+        }
     }    break;
     case '5': {
         // Koch SnowFlake // Este se dibuja en el file de SnowFlake.cpp
         lanieve.draw();
-        text.drawString(to_string(lanieve.getDepth()),25,120); //debug para ver si cambia depth
+        if(debug){
+            text.drawString("Koch SnowFlake Fractal",25,60);
+        }
 
     }   break;
     case '6': {
         //3d Fractal //Estese dibuja en el file de Fractal3D.cpp
         Triangulitos.draw({{"n", Triangulitos.getDepth()}, {"scale", 100}});
-        text.drawString(to_string(Triangulitos.getDepth()),25,120); //debug para ver si cambia depth
+        if(debug){
+            text.drawString("3D Fractal",25,60);
+        }
        
     }   break;
+    }
+    if(debug){
+        // Levels of different shapes
+       dataText.drawString("1.Circle Level: " + to_string(dm1depth),25,240); 
+       dataText.drawString("2.Tree Level: " + to_string(dm2depth),25,300); 
+       dataText.drawString("3.Triangle Level: " + to_string(dm3depth),25,360); 
+       dataText.drawString("4.Barnsley Level: " + to_string(dm4depth),25,420); 
+       dataText.drawString("5.SnowFlake Level: " + to_string(lanieve.getDepth()),25,480); 
+       dataText.drawString("6.3D Fractal Level: " + to_string(Triangulitos.getDepth()),25,540); 
+    	
+        // Información de como subir los niveles
+        dataText.drawString("Press Right Arrow to Level up the Recursion",950,60);
+        dataText.drawString("Press Left Arrow to Level up the Recursion",957,120);
+       
     }
 }
 
@@ -226,6 +254,14 @@ void ofApp::keyPressed(int key) {
         if(mode == '6' && Triangulitos.getDepth()>0){
             Triangulitos.setdepth(Triangulitos.getDepth()-1);
         }   
+    }
+    if(tolower(key) == 'd'){
+        if(!debug){
+            debug = true;
+        }
+        else{
+            debug = false;
+        }
     }
 }
 

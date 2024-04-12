@@ -61,4 +61,6 @@ class ofApp : public ofBaseApp {
     ofEasyCam cam;
     ofTrueTypeFont text;
     ofTrueTypeFont dataText;
+
+    bool debug = false;           // Utilizado para saber cuando se requiere enseñar la información de "debugging"
 };
