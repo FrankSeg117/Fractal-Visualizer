@@ -25,50 +25,10 @@ void ofApp::draw() {
     ofBackgroundGradient(ofColor(65), ofColor(0), OF_GRADIENT_BAR);
 
     ofNoFill();
-    switch (mode) {
-    case '1': {
-        // Circle
-        Fractals[0]->draw();
-        Fractals[0]->update(); //instead of using static_cast to increase angle, we use an update method for it
-        text.drawString(Fractals[0]->getName(),25,60);
+        Fractals[index-1]->draw();
+        Fractals[index-1]->update(); //instead of using static_cast to increase angle, we use an update method for it
+        text.drawString(Fractals[index-1]->getName(),25,60);
 
-    } break;
-    case '2': {
-        // Tree //Default length is 0.31        
-        Fractals[1]->draw();
-        Fractals[1]->update();
-        text.drawString(Fractals[1]->getName(),25,60);
-
-    } break;
-    case '3': {
-        // Sierpinski Triangle
-        Fractals[2]->draw();
-        Fractals[2]->update();
-        text.drawString(Fractals[2]->getName(),25,60);
-
-    } break;
-    case '4': {
-        // Barnsley Fern
-        Fractals[3]->draw();
-        Fractals[3]->update();
-        text.drawString(Fractals[3]->getName(),25,60);
-
-    }    break;
-    case '5': {
-        // Koch SnowFlake 
-        Fractals[4]->draw();
-        Fractals[4]->update();
-        text.drawString(Fractals[4]->getName(),25,60);
-
-    }   break;
-    case '6': {
-        //3d Fractal
-        Fractals[5]->draw();
-        Fractals[5]->update();
-        text.drawString(Fractals[5]->getName(),25,60);
-       
-    }   break;
-    }
     if(debug){
         // Levels of different shapes
        dataText.drawString("1.Circle Level: " + to_string(Fractals[0]->getLevel()),25,240); 
@@ -89,6 +49,7 @@ void ofApp::draw() {
 void ofApp::keyPressed(int key) {
     if (key >= '1' && key <= '6'){
         mode = key;
+        index = key - '0'; //Convertimos el character a int
     }
     if(key == OF_KEY_RIGHT){
         if(mode == '1' && Fractals[0]->getLevel()<5){

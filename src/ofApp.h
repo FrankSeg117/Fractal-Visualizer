@@ -13,7 +13,7 @@
 class ofApp : public ofBaseApp {
   private:
     char mode = '1';
-
+    int index = 1;
   public:
     void setup();
     void update();
