@@ -13,7 +13,6 @@ void Circle::draw(){
 }
 
 void Circle::draw(float x, float y, float r, int n, int colorindex){
-
     if (n == 0) return;
 
     ofSetColor(colores[colorindex]);

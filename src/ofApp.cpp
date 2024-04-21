@@ -10,6 +10,8 @@ void ofApp::setup() {
     Triangulitos.setcam(&cam); //Se le asigna al fractal3d la cam creada
 
     Fractals.push_back(new Circle("Circle Fractal", 2));
+    Fractals.push_back(new Tree("Tree Fractal", 1));
+
 }
 
 //--------------------------------------------------------------
@@ -30,16 +32,11 @@ void ofApp::draw() {
 
     } break;
     case '2': {
-        // Tree //Default length is 0.31
-        float length = 0.31 * ofGetHeight();
+        // Tree //Default length is 0.31        
+        Fractals[1]->draw();
+        Fractals[1]->update();
+        text.drawString(Fractals[1]->getName(),25,60);
 
-        drawMode2(ofGetWidth() / 2, ofGetHeight() - 20, dm2depth, length, 1.5 * PI,0);
-        drawMode2(ofGetWidth() / 2 + 700, ofGetHeight() + 100, dm2depth, length/2, 1.5 * PI,0);
-        drawMode2(ofGetWidth() / 2 - 700, ofGetHeight() + 100, dm2depth, length/2, 1.5 * PI,0);
-   
-        if(debug){
-            text.drawString("Tree Fractal",25,60);
-        }
     } break;
     case '3': {
         // Sierpinski Triangle
@@ -76,7 +73,7 @@ void ofApp::draw() {
     if(debug){
         // Levels of different shapes
        dataText.drawString("1.Circle Level: " + to_string(Fractals[0]->getLevel()),25,240); 
-       dataText.drawString("2.Tree Level: " + to_string(dm2depth),25,300); 
+       dataText.drawString("2.Tree Level: " + to_string(Fractals[1]->getLevel()),25,300); 
        dataText.drawString("3.Triangle Level: " + to_string(dm3depth),25,360); 
        dataText.drawString("4.Barnsley Level: " + to_string(dm4depth),25,420); 
        dataText.drawString("5.SnowFlake Level: " + to_string(lanieve.getDepth()),25,480); 
@@ -87,27 +84,6 @@ void ofApp::draw() {
         dataText.drawString("Press Left Arrow to Level up the Recursion",957,120);
        
     }
-}
-
-//Drawing method for Tree
-void ofApp::drawMode2(float x, float y, int n, float length, float rad, int colorindex) {
-    if (n == 0) return;             //0                 //1                 2                   3               4               
-    vector<ofColor> colores = {ofColor::brown, ofColor::rosyBrown, ofColor::burlyWood, ofColor::sandyBrown, ofColor::olive,
-                               ofColor::green, ofColor::limeGreen, ofColor::forestGreen, ofColor::seaGreen, ofColor::springGreen,
-                               ofColor::paleGreen,ofColor::darkGreen,ofColor::greenYellow,ofColor::ghostWhite,ofColor::hotPink, //<-End point
-                               ofColor::lightGoldenRodYellow,ofColor::lime,ofColor::lemonChiffon}; //<-Extra locations in case of a big oof
-    // if(colorindex>=colores.size()){
-    //     colorindex=4;
-    // }
-    float x2 = x + length * cos(rad);
-    float y2 = y + length * sin(rad);
-
-    ofSetColor(colores[colorindex]); 
-    ofDrawLine(x, y, x2, y2);
-    ofSetColor(ofColor::white); //reset the color back to white
-
-    drawMode2(x2, y2, n - 1, 0.7 * length, rad + 0.2 * PI,colorindex+1);
-    drawMode2(x2, y2, n - 1, 0.7 * length, rad - 0.2 * PI,colorindex+1);
 }
 
 //Drawing method for Sierpinski Triangle
@@ -198,8 +174,8 @@ void ofApp::keyPressed(int key) {
         if(mode == '1' && Fractals[0]->getLevel()<5){
             Fractals[0]->setLevel(Fractals[0]->getLevel()+1);
         }
-        if(mode == '2' && dm2depth<15){
-            dm2depth++;
+        if(mode == '2' && Fractals[1]->getLevel()<15){
+            Fractals[1]->setLevel(Fractals[1]->getLevel()+1);
         }
         if(mode == '3' && dm3depth<10){
             dm3depth++;
@@ -219,8 +195,8 @@ void ofApp::keyPressed(int key) {
         if(mode == '1' && Fractals[0]->getLevel()>1){
             Fractals[0]->setLevel(Fractals[0]->getLevel()-1);
         }
-        if(mode == '2' && dm2depth>1){
-            dm2depth--;
+        if(mode == '2' && Fractals[1]->getLevel()>1){
+            Fractals[1]->setLevel(Fractals[1]->getLevel()-1);
         }
         if(mode == '3' && dm3depth>1){
             dm3depth--;

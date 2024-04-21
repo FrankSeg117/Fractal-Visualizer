@@ -9,6 +9,7 @@
 #include "Fractal.h"
 #include "AbstractFractal.h"
 #include "Circle.h"
+#include "Tree.h"
 
 class ofApp : public ofBaseApp {
   private:
@@ -31,8 +32,7 @@ class ofApp : public ofBaseApp {
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
 
-    void drawMode1(float x, float y, float r, int n, int colorindex);
-    void drawMode2(float x, float y, int n, float length, float rad, int colorindex);
+    // void drawMode2(float x, float y, int n, float length, float rad, int colorindex);
     void drawMode3(float x, float y, float size, int n, int colorindex);
     void drawMode4(float x, float y, float n);
 
