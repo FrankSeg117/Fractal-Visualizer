@@ -1,15 +1,18 @@
 #pragma once
 
 #include <cmath>
+#include "ofMain.h"
+
 #include "SnowFlake.h"
 #include "Fractal3D.h"
 
-#include "ofMain.h"
+#include "Fractal.h"
+#include "AbstractFractal.h"
+#include "Circle.h"
 
 class ofApp : public ofBaseApp {
   private:
     char mode = '1';
-    float angle = 0;
 
   public:
     void setup();
@@ -46,9 +49,10 @@ class ofApp : public ofBaseApp {
         ofColor::aquamarine,     // 
         ofColor::turquoise,      // 
         ofColor::darkSlateBlue            // 
-    };
+    }; 
 
-    int dm1depth = 3;
+    vector<Fractal*> Fractals;
+
     int dm2depth = 10;
     int dm3depth = 7;
     int dm4depth = 10;
@@ -62,5 +66,5 @@ class ofApp : public ofBaseApp {
     ofTrueTypeFont text;
     ofTrueTypeFont dataText;
 
-    bool debug = false;           // Utilizado para saber cuando se requiere enseñar la información de "debugging"
+    bool debug = false;//Toggle with 'D'// Utilizado para saber cuando se requiere enseñar la información de "debugging"
 };

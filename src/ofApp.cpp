@@ -8,6 +8,8 @@ void ofApp::setup() {
     text.load("Fonts/fractalFont.otf",40);
     dataText.load("Fonts/fractalFont.otf",23);
     Triangulitos.setcam(&cam); //Se le asigna al fractal3d la cam creada
+
+    Fractals.push_back(new Circle("Circle Fractal", 2));
 }
 
 //--------------------------------------------------------------
@@ -22,12 +24,10 @@ void ofApp::draw() {
     switch (mode) {
     case '1': {
         // Circle
-        float r = 0.31 * ofGetHeight();
-        angle += 0.01;
-        drawMode1(ofGetWidth() / 2, ofGetHeight() / 2, r, dm1depth,0);
-        if(debug){
-            text.drawString("Circle Fractal",25,60);
-        }
+        Fractals[0]->draw();
+        Fractals[0]->update(); //instead of using static_cast to increase angle, we use an update method for the fractals
+        text.drawString(Fractals[0]->getName(),25,60);
+
     } break;
     case '2': {
         // Tree //Default length is 0.31
@@ -75,7 +75,7 @@ void ofApp::draw() {
     }
     if(debug){
         // Levels of different shapes
-       dataText.drawString("1.Circle Level: " + to_string(dm1depth),25,240); 
+       dataText.drawString("1.Circle Level: " + to_string(Fractals[0]->getLevel()),25,240); 
        dataText.drawString("2.Tree Level: " + to_string(dm2depth),25,300); 
        dataText.drawString("3.Triangle Level: " + to_string(dm3depth),25,360); 
        dataText.drawString("4.Barnsley Level: " + to_string(dm4depth),25,420); 
@@ -87,31 +87,6 @@ void ofApp::draw() {
         dataText.drawString("Press Left Arrow to Level up the Recursion",957,120);
        
     }
-}
-
-//Drawing method for Circle
-void ofApp::drawMode1(float x, float y, float r, int n, int colorindex) {
-    if (n == 0) return;
-    vector<ofColor> colores = {ofColor::blue, ofColor::red, ofColor::green, ofColor::yellow, ofColor::cyan};
-
-    ofSetColor(colores[colorindex]);
-     
-    int delta = r * 0.35;
-    ofDrawCircle(x, y, r);
-    ofSetColor(ofColor::white); //reset the color back to white
-    
-    float angle1 = angle;
-    float angle2 = PI / 3 + angle;
-    float angle3 = PI + angle;
-    float angle4 = 2 * PI / 3 + angle;
-    float angle5 = 4 * PI / 3 + angle;
-    float angle6 = 5 * PI / 3 + angle;
-    drawMode1(x + r * cos(angle1), y + r * sin(angle1), delta, n - 1,colorindex+1);
-    drawMode1(x + r * cos(angle2), y + r * sin(angle2), delta, n - 1,colorindex+1);
-    drawMode1(x + r * cos(angle3), y + r * sin(angle3), delta, n - 1,colorindex+1);
-    drawMode1(x + r * cos(angle4), y + r * sin(angle4), delta, n - 1,colorindex+1);
-    drawMode1(x + r * cos(angle5), y + r * sin(angle5), delta, n - 1,colorindex+1);
-    drawMode1(x + r * cos(angle6), y + r * sin(angle6), delta, n - 1,colorindex+1);
 }
 
 //Drawing method for Tree
@@ -220,8 +195,8 @@ void ofApp::keyPressed(int key) {
         mode = key;
     }
     if(key == OF_KEY_RIGHT){
-        if(mode == '1' && dm1depth<5){
-            dm1depth++;
+        if(mode == '1' && Fractals[0]->getLevel()<5){
+            Fractals[0]->setLevel(Fractals[0]->getLevel()+1);
         }
         if(mode == '2' && dm2depth<15){
             dm2depth++;
@@ -233,7 +208,7 @@ void ofApp::keyPressed(int key) {
             dm4depth+=5;
         }
         if(mode == '5' && lanieve.getDepth()<6){
-            lanieve.setDepth(lanieve.getDepth()+1);
+            lanieve.setLevel(lanieve.getDepth()+1);
         }
         if(mode == '6' && Triangulitos.getDepth()<9){
             Triangulitos.setdepth(Triangulitos.getDepth()+1);
@@ -241,8 +216,8 @@ void ofApp::keyPressed(int key) {
     }
     //This will decrease 
     if(key == OF_KEY_LEFT){ 
-        if(mode == '1' && dm1depth>1){
-            dm1depth--;
+        if(mode == '1' && Fractals[0]->getLevel()>1){
+            Fractals[0]->setLevel(Fractals[0]->getLevel()-1);
         }
         if(mode == '2' && dm2depth>1){
             dm2depth--;
@@ -254,19 +229,20 @@ void ofApp::keyPressed(int key) {
             dm4depth-=5;
         }
         if(mode == '5' && lanieve.getDepth()>1){
-            lanieve.setDepth(lanieve.getDepth()-1);
+            lanieve.setLevel(lanieve.getDepth()-1);
         }
         if(mode == '6' && Triangulitos.getDepth()>0){
             Triangulitos.setdepth(Triangulitos.getDepth()-1);
         }   
     }
     if(tolower(key) == 'd'){
-        if(!debug){
-            debug = true;
-        }
-        else{
-            debug = false;
-        }
+        debug = !debug;
+        // if(!debug){
+        //     debug = true;
+        // }
+        // else{
+        //     debug = false;
+        // }
     }
 }
 

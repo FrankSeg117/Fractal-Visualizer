@@ -23,7 +23,7 @@ class SnowFlake {
     void setStart(glm::vec2 start) { this->start = start; }
     void setEnd(glm::vec2 end) { this->end = end; }
 
-    void setDepth(int depth){this->SFdrawdepth=depth;}
+    void setLevel(int depth){this->SFdrawdepth=depth;}
     int getDepth(){return this->SFdrawdepth;}
 
     void draw();

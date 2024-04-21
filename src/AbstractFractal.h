@@ -4,11 +4,14 @@
 #include "Fractal.h"
 
 class AbstractFractal : public Fractal {
-    public:
-    // Esto se tiene que modificar para la fase 3
+    protected:
         string name;
         int level;
 
+    // Esto se tiene que modificar para la fase 3
+    public:
+
+    //Constructor
         AbstractFractal(string name, int level){
             this->name = name;
             this->level = level;
@@ -19,9 +22,9 @@ class AbstractFractal : public Fractal {
         int getLevel(){return level;}
 
     //Setters
-        string setName(string name){this->name = name;}
-        int setLevel(int level){this->level = level;}
+        void setName(string name){this->name = name;}
+        void setLevel(int level){this->level = level;}
 
         virtual void draw() = 0;
-
+        virtual void update() = 0;
 };
