@@ -190,12 +190,6 @@ void ofApp::keyPressed(int key) {
     }
     if(tolower(key) == 'd'){
         debug = !debug;
-        // if(!debug){
-        //     debug = true;
-        // }
-        // else{
-        //     debug = false;
-        // }
     }
 }
 
