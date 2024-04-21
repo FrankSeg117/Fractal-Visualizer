@@ -10,7 +10,7 @@ class AbstractFractal : public Fractal {
 
     // Esto se tiene que modificar para la fase 3
     public:
-
+        AbstractFractal(){}
     //Constructor
         AbstractFractal(string name, int level){
             this->name = name;

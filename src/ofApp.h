@@ -53,11 +53,10 @@ class ofApp : public ofBaseApp {
 
     vector<Fractal*> Fractals;
 
-    int dm4depth = 10;
     int dm5depth = 3;
     int dm6depth = 3;
     
-    SnowFlake lanieve;
+    // SnowFlake lanieve;
     Fractal3D Triangulitos;
 
     ofEasyCam cam;
