@@ -7,14 +7,13 @@ void ofApp::setup() {
     cam.setDistance(200);
     text.load("Fonts/fractalFont.otf",40);
     dataText.load("Fonts/fractalFont.otf",23);
-    Triangulitos.setcam(&cam); //Se le asigna al fractal3d la cam creada
 
     Fractals.push_back(new Circle("Circle Fractal", 2));
     Fractals.push_back(new Tree("Tree Fractal", 1));
     Fractals.push_back(new Triangle("Triangle Fractal", 2));
     Fractals.push_back(new Fern("Barnsley Fern", 10));
     Fractals.push_back(new SnowFlake("Koch SnowFlake", 3));
-
+    Fractals.push_back(new Fractal3D("3D Fractal", 3, &cam));
 }
 
 //--------------------------------------------------------------
@@ -56,18 +55,17 @@ void ofApp::draw() {
 
     }    break;
     case '5': {
-        // Koch SnowFlake // Este se dibuja en el file de SnowFlake.cpp
+        // Koch SnowFlake 
         Fractals[4]->draw();
         Fractals[4]->update();
         text.drawString(Fractals[4]->getName(),25,60);
 
     }   break;
     case '6': {
-        //3d Fractal //Estese dibuja en el file de Fractal3D.cpp
-        Triangulitos.draw({{"n", Triangulitos.getDepth()}, {"scale", 100}});
-        if(debug){
-            text.drawString("3D Fractal",25,60);
-        }
+        //3d Fractal
+        Fractals[5]->draw();
+        Fractals[5]->update();
+        text.drawString(Fractals[5]->getName(),25,60);
        
     }   break;
     }
@@ -78,11 +76,11 @@ void ofApp::draw() {
        dataText.drawString("3.Triangle Level: " + to_string(Fractals[2]->getLevel()),25,360); 
        dataText.drawString("4.Barnsley Level: " + to_string(Fractals[3]->getLevel()),25,420); 
        dataText.drawString("5.SnowFlake Level: " + to_string(Fractals[4]->getLevel()),25,480); 
-       dataText.drawString("6.3D Fractal Level: " + to_string(Triangulitos.getDepth()),25,540); 
+       dataText.drawString("6.3D Fractal Level: " + to_string(Fractals[5]->getLevel()),25,540); 
     	
-        // Información de como subir los niveles
-        dataText.drawString("Press Right Arrow to Level up the Recursion",950,60);
-        dataText.drawString("Press Left Arrow to Level up the Recursion",957,120);
+       // Información de como subir los niveles
+       dataText.drawString("Press Right Arrow to Level up the Recursion",950,60);
+       dataText.drawString("Press Left Arrow to Level down the Recursion",957,120);
        
     }
 }
@@ -108,8 +106,10 @@ void ofApp::keyPressed(int key) {
         if(mode == '5' && Fractals[4]->getLevel()<6){
             Fractals[4]->setLevel(Fractals[4]->getLevel()+1);
         }
-        if(mode == '6' && Triangulitos.getDepth()<9){
-            Triangulitos.setdepth(Triangulitos.getDepth()+1);
+        if(mode == '6' && Fractals[5]->getLevel()<9){
+            Fractals[5]->setLevel(Fractals[5]->getLevel()+1);
+            static_cast<Fractal3D*>(Fractals[5])->reset();
+
         }                
     }
     //This will decrease 
@@ -129,8 +129,9 @@ void ofApp::keyPressed(int key) {
         if(mode == '5' && Fractals[4]->getLevel()>1){
             Fractals[4]->setLevel(Fractals[4]->getLevel()-1);
         }
-        if(mode == '6' && Triangulitos.getDepth()>0){
-            Triangulitos.setdepth(Triangulitos.getDepth()-1);
+        if(mode == '6' && Fractals[5]->getLevel()>0){
+            Fractals[5]->setLevel(Fractals[5]->getLevel()-1);
+            static_cast<Fractal3D*>(Fractals[5])->reset();
         }   
     }
     if(tolower(key) == 'd'){

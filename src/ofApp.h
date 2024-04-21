@@ -1,17 +1,14 @@
 #pragma once
-
 #include <cmath>
 #include "ofMain.h"
-
-#include "SnowFlake.h"
-#include "Fractal3D.h"
-
 #include "Fractal.h"
 #include "AbstractFractal.h"
 #include "Circle.h"
 #include "Tree.h"
 #include "Triangle.h"
 #include "Fern.h"
+#include "SnowFlake.h"
+#include "Fractal3D.h"
 
 class ofApp : public ofBaseApp {
   private:
@@ -36,28 +33,7 @@ class ofApp : public ofBaseApp {
 
     void drawMode4(float x, float y, float n);
 
-    vector<ofColor> LoColores = {
-        ofColor::red,            // 
-        ofColor::darkBlue,           // 
-        ofColor::green,          // 
-        ofColor::lightGoldenRodYellow,         // 
-        ofColor::cyan,           // 
-        ofColor::magenta,        // 
-        ofColor::orange,         // 
-        ofColor::purple,         // 
-        ofColor::chartreuse,     // 
-        ofColor::aquamarine,     // 
-        ofColor::turquoise,      // 
-        ofColor::darkSlateBlue            // 
-    }; 
-
     vector<Fractal*> Fractals;
-
-    int dm5depth = 3;
-    int dm6depth = 3;
-    
-    // SnowFlake lanieve;
-    Fractal3D Triangulitos;
 
     ofEasyCam cam;
     ofTrueTypeFont text;
