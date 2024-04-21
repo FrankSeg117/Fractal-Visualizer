@@ -10,6 +10,7 @@
 #include "AbstractFractal.h"
 #include "Circle.h"
 #include "Tree.h"
+#include "Triangle.h"
 
 class ofApp : public ofBaseApp {
   private:
@@ -53,8 +54,6 @@ class ofApp : public ofBaseApp {
 
     vector<Fractal*> Fractals;
 
-    int dm2depth = 10;
-    int dm3depth = 7;
     int dm4depth = 10;
     int dm5depth = 3;
     int dm6depth = 3;

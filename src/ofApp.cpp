@@ -11,6 +11,7 @@ void ofApp::setup() {
 
     Fractals.push_back(new Circle("Circle Fractal", 2));
     Fractals.push_back(new Tree("Tree Fractal", 1));
+    Fractals.push_back(new Triangle("Triangle Fractal", 2));
 
 }
 
@@ -27,7 +28,7 @@ void ofApp::draw() {
     case '1': {
         // Circle
         Fractals[0]->draw();
-        Fractals[0]->update(); //instead of using static_cast to increase angle, we use an update method for the fractals
+        Fractals[0]->update(); //instead of using static_cast to increase angle, we use an update method for it
         text.drawString(Fractals[0]->getName(),25,60);
 
     } break;
@@ -40,11 +41,10 @@ void ofApp::draw() {
     } break;
     case '3': {
         // Sierpinski Triangle
-        float size = 0.88 * ofGetHeight();
-        drawMode3((ofGetWidth() - size) / 2, ofGetHeight() / 2 - 0.4 * size, size, dm3depth,0);
-        if(debug){
-            text.drawString("Sierpinski Triangle Fractal",25,60);
-        }
+        Fractals[2]->draw();
+        Fractals[2]->update();
+        text.drawString(Fractals[2]->getName(),25,60);
+
     } break;
     case '4': {
         // Barnsley Fern
@@ -74,7 +74,7 @@ void ofApp::draw() {
         // Levels of different shapes
        dataText.drawString("1.Circle Level: " + to_string(Fractals[0]->getLevel()),25,240); 
        dataText.drawString("2.Tree Level: " + to_string(Fractals[1]->getLevel()),25,300); 
-       dataText.drawString("3.Triangle Level: " + to_string(dm3depth),25,360); 
+       dataText.drawString("3.Triangle Level: " + to_string(Fractals[2]->getLevel()),25,360); 
        dataText.drawString("4.Barnsley Level: " + to_string(dm4depth),25,420); 
        dataText.drawString("5.SnowFlake Level: " + to_string(lanieve.getDepth()),25,480); 
        dataText.drawString("6.3D Fractal Level: " + to_string(Triangulitos.getDepth()),25,540); 
@@ -84,29 +84,6 @@ void ofApp::draw() {
         dataText.drawString("Press Left Arrow to Level up the Recursion",957,120);
        
     }
-}
-
-//Drawing method for Sierpinski Triangle
-void ofApp::drawMode3(float x, float y, float size, int n, int colorindex) {
-    if (n == 0) {
-        return;
-    }
-    vector<ofColor> colores = {ofColor::brown, ofColor::rosyBrown, ofColor::burlyWood, ofColor::sandyBrown, ofColor::olive,
-                               ofColor::green, ofColor::limeGreen, ofColor::forestGreen, ofColor::seaGreen, ofColor::springGreen,
-                               ofColor::paleGreen,ofColor::darkGreen,ofColor::yellow,ofColor::purple,ofColor::greenYellow,
-                               ofColor::lightGoldenRodYellow,ofColor::lime,ofColor::lemonChiffon};   
-
-    ofPoint a(x, y);
-    ofPoint b(x + size, y);
-    ofPoint c(x + size / 2, y + ((sqrt(3) * size) / 2));
-
-    ofSetColor(colores[colorindex]); 
-    ofDrawTriangle(a, b, c);
-    ofSetColor(ofColor::white);
-
-    drawMode3(x, y, size / 2, n - 1, colorindex);
-    drawMode3((a.x + b.x) / 2, (a.y + b.y) / 2, size / 2, n - 1, colorindex);
-    drawMode3((a.x + c.x) / 2, (a.y + c.y) / 2, size / 2, n - 1, colorindex+1);
 }
 
 //Drawing method for Barnsley Fern
@@ -177,8 +154,8 @@ void ofApp::keyPressed(int key) {
         if(mode == '2' && Fractals[1]->getLevel()<15){
             Fractals[1]->setLevel(Fractals[1]->getLevel()+1);
         }
-        if(mode == '3' && dm3depth<10){
-            dm3depth++;
+        if(mode == '3' && Fractals[2]->getLevel()<10){
+            Fractals[2]->setLevel(Fractals[2]->getLevel()+1);
         }
         if(mode == '4' && dm4depth<50){
             dm4depth+=5;
@@ -198,8 +175,8 @@ void ofApp::keyPressed(int key) {
         if(mode == '2' && Fractals[1]->getLevel()>1){
             Fractals[1]->setLevel(Fractals[1]->getLevel()-1);
         }
-        if(mode == '3' && dm3depth>1){
-            dm3depth--;
+        if(mode == '3' && Fractals[2]->getLevel()>1){
+            Fractals[2]->setLevel(Fractals[2]->getLevel()-1);
         }
         if(mode == '4' && dm4depth>5){
             dm4depth-=5;
