@@ -12,6 +12,7 @@ class Fractal{
         virtual void setName(string name) = 0; //este env q no
         virtual void setLevel(int level) = 0; //por lo menos este es esencial mano
 
+        //Metodos abstractos para cambiar profundidad en todos los fractales
         virtual void increaseLevel() = 0;
         virtual void decreaseLevel() = 0;
         
