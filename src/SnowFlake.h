@@ -39,6 +39,15 @@ class SnowFlake : public AbstractFractal{
     void draw();
     void draw(int n, SnowFlake *flake,int colorindex);
 
+    virtual void increaseLevel(){
+        if(this->getLevel()<6){
+        this->setLevel(this->getLevel()+1);}
+        }
+    virtual void decreaseLevel(){
+        if(this->getLevel()>1){
+        this->setLevel(this->getLevel()-1);}
+    }
+
     glm::vec2 getA();
     glm::vec2 getB();
     glm::vec2 getC();

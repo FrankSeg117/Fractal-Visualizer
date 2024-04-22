@@ -27,4 +27,6 @@ class AbstractFractal : public Fractal {
 
         virtual void draw() = 0;
         virtual void update() = 0;
+        virtual void increaseLevel() = 0;
+        virtual void decreaseLevel() = 0;
 };

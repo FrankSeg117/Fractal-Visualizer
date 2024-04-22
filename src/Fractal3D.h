@@ -22,6 +22,19 @@ class Fractal3D : public AbstractFractal{
         void update();
         void draw();
         void draw(map<string, float>);
+
+        virtual void increaseLevel(){
+            if(this->getLevel()<9){
+                this->setLevel(this->getLevel()+1);
+                reset();
+            }
+        }
+        virtual void decreaseLevel(){
+            if(this->getLevel()>0){
+                this->setLevel(this->getLevel()-1);
+                reset();
+            }
+        }
         void generateTetrahedron(vector<vec3>& base, vec3 peak, int n);
         void reset();
         map<string, float> getDefaultConfig();

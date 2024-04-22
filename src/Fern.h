@@ -15,6 +15,15 @@ class Fern : public AbstractFractal {
     virtual void draw();
     virtual void draw(float x, float y, float n);
 
+    virtual void increaseLevel(){
+        if(this->getLevel()<50){
+        this->setLevel(this->getLevel()+5);}
+        }
+    virtual void decreaseLevel(){
+        if(this->getLevel()>5){
+        this->setLevel(this->getLevel()-5);}
+    }
+
     vector<ofColor> colores = {
         ofColor(255, 0, 0),     // Red
         ofColor(0, 255, 0),     // Green

@@ -22,6 +22,14 @@ class Circle : public AbstractFractal {
     virtual void draw();
     virtual void draw(float x, float y, float r, int level, int colorindex);
 
+    virtual void increaseLevel(){
+        if(this->getLevel()<5){
+        this->setLevel(this->getLevel()+1);}
+        }
+    virtual void decreaseLevel(){
+        if(this->getLevel()>1){
+        this->setLevel(this->getLevel()-1);}
+    }
     void setAngle(float angle){ this->angle = angle;}
     float getAngle(){return this->angle;}
 

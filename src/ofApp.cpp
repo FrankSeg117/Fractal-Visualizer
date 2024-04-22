@@ -12,7 +12,7 @@ void ofApp::setup() {
     Fractals.push_back(new Tree("Tree Fractal", 1));
     Fractals.push_back(new Triangle("Triangle Fractal", 2));
     Fractals.push_back(new Fern("Barnsley Fern", 10));
-    Fractals.push_back(new SnowFlake("Koch SnowFlake", 3));
+    Fractals.push_back(new SnowFlake("Koch SnowFlake", 2));
     Fractals.push_back(new Fractal3D("3D Fractal", 3, &cam));
 }
 
@@ -51,49 +51,13 @@ void ofApp::keyPressed(int key) {
         mode = key;
         index = key - '0'; //Convertimos el character a int
     }
+    //This will increase level
     if(key == OF_KEY_RIGHT){
-        if(mode == '1' && Fractals[0]->getLevel()<5){
-            Fractals[0]->setLevel(Fractals[0]->getLevel()+1);
-        }
-        if(mode == '2' && Fractals[1]->getLevel()<15){
-            Fractals[1]->setLevel(Fractals[1]->getLevel()+1);
-        }
-        if(mode == '3' && Fractals[2]->getLevel()<10){
-            Fractals[2]->setLevel(Fractals[2]->getLevel()+1);
-        }
-        if(mode == '4' && Fractals[3]->getLevel()<50){
-            Fractals[3]->setLevel(Fractals[3]->getLevel()+5);
-        }
-        if(mode == '5' && Fractals[4]->getLevel()<6){
-            Fractals[4]->setLevel(Fractals[4]->getLevel()+1);
-        }
-        if(mode == '6' && Fractals[5]->getLevel()<9){
-            Fractals[5]->setLevel(Fractals[5]->getLevel()+1);
-            static_cast<Fractal3D*>(Fractals[5])->reset();
-
-        }                
+        Fractals[index-1]->increaseLevel();            
     }
-    //This will decrease 
+    //This will decrease level
     if(key == OF_KEY_LEFT){ 
-        if(mode == '1' && Fractals[0]->getLevel()>1){
-            Fractals[0]->setLevel(Fractals[0]->getLevel()-1);
-        }
-        if(mode == '2' && Fractals[1]->getLevel()>1){
-            Fractals[1]->setLevel(Fractals[1]->getLevel()-1);
-        }
-        if(mode == '3' && Fractals[2]->getLevel()>1){
-            Fractals[2]->setLevel(Fractals[2]->getLevel()-1);
-        }
-        if(mode == '4' && Fractals[3]->getLevel()>5){
-            Fractals[3]->setLevel(Fractals[3]->getLevel()-5);
-        }
-        if(mode == '5' && Fractals[4]->getLevel()>1){
-            Fractals[4]->setLevel(Fractals[4]->getLevel()-1);
-        }
-        if(mode == '6' && Fractals[5]->getLevel()>0){
-            Fractals[5]->setLevel(Fractals[5]->getLevel()-1);
-            static_cast<Fractal3D*>(Fractals[5])->reset();
-        }   
+        Fractals[index-1]->decreaseLevel(); 
     }
     if(tolower(key) == 'd'){
         debug = !debug;
