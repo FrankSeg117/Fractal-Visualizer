@@ -16,7 +16,7 @@ Don't forget that you must also fill out an evaluation form in Moodle to conside
 ## Grading
 
 Partner 1: (802-21-6247) (Frank A. Seguí González) (frank.segui1@upr.edu)
-Partner 2: (STUDENT NUMBER HERE) (STUDENT NAME HERE) (jonathan.gonzalez57@upr.edu)
+Partner 2: (802-21-6239) (Jonathan González Rodríguez) (jonathan.gonzalez57@upr.edu)
 
 Any project that doesn't compile will receive a 0.
 
