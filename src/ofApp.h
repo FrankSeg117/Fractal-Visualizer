@@ -32,6 +32,7 @@ class ofApp : public ofBaseApp {
     void drawMode2(float x, float y, int n, float length, float rad, int colorindex);
     void drawMode3(float x, float y, float size, int n, int colorindex);
     void drawMode4(float x, float y, float n);
+    void drawmode5(float cx, float cy, float sizex, float sizey, float angle, int n, int colorindex);
 
     vector<ofColor> LoColores = {
         ofColor::red,            // 
@@ -52,8 +53,7 @@ class ofApp : public ofBaseApp {
     int dm2depth = 10;
     int dm3depth = 7;
     int dm4depth = 10;
-    int dm5depth = 3;
-    int dm6depth = 3;
+    int dm5depth = 1;
     
     SnowFlake lanieve;
     Fractal3D Triangulitos;
@@ -63,4 +63,7 @@ class ofApp : public ofBaseApp {
     ofTrueTypeFont dataText;
 
     bool debug = false;           // Utilizado para saber cuando se requiere enseñar la información de "debugging"
+
+    float hilx = ofGetWindowWidth();
+    float hily = ofGetWindowHeight();
 };

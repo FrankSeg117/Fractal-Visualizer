@@ -65,13 +65,22 @@ void ofApp::draw() {
 
     }   break;
     case '6': {
+        
+        //Drawing of Hibert's Curve
+        // Curvitas.draw(Curvitas.getDepth(), 0);
+        if(debug){
+            text.drawString("Hilbert Curve",25,60);
+        }
+        drawmode5(hilx/2, hily/2, hilx, hily,0, dm5depth,0);
+
+    }   break;
+    case '7': {
         //3d Fractal //Estese dibuja en el file de Fractal3D.cpp
         Triangulitos.draw({{"n", Triangulitos.getDepth()}, {"scale", 100}});
         if(debug){
             text.drawString("3D Fractal",25,60);
         }
-       
-    }   break;
+    }
     }
     if(debug){
         // Levels of different shapes
@@ -80,11 +89,12 @@ void ofApp::draw() {
        dataText.drawString("3.Triangle Level: " + to_string(dm3depth),25,360); 
        dataText.drawString("4.Barnsley Level: " + to_string(dm4depth),25,420); 
        dataText.drawString("5.SnowFlake Level: " + to_string(lanieve.getDepth()),25,480); 
-       dataText.drawString("6.3D Fractal Level: " + to_string(Triangulitos.getDepth()),25,540); 
+       dataText.drawString("6.Hilbert Curve Level: " + to_string(dm5depth),25,540);
+       dataText.drawString("7.3D Fractal Level: " + to_string(Triangulitos.getDepth()),25,600); 
     	
         // Información de como subir los niveles
-        dataText.drawString("Press Right Arrow to Level up the Recursion",950,60);
-        dataText.drawString("Press Left Arrow to Level up the Recursion",957,120);
+        dataText.drawString("Press Right Arrow to Level up the Recursion",ofGetWindowWidth()*0.6875,ofGetWindowHeight()*0.0375);
+        dataText.drawString("Press Left Arrow to Level up the Recursion",ofGetWindowWidth()*0.6875,ofGetWindowHeight()*0.075);
        
     }
 }
@@ -92,7 +102,7 @@ void ofApp::draw() {
 //Drawing method for Circle
 void ofApp::drawMode1(float x, float y, float r, int n, int colorindex) {
     if (n == 0) return;
-    vector<ofColor> colores = {ofColor::blue, ofColor::red, ofColor::green, ofColor::yellow, ofColor::cyan};
+    vector<ofColor> colores = {ofColor::springGreen, ofColor::turquoise, ofColor::lightGoldenRodYellow, ofColor::hotPink, ofColor::cyan};
 
     ofSetColor(colores[colorindex]);
      
@@ -197,8 +207,7 @@ void ofApp::drawMode4(float x, float y, float n) {
 
     ofFill();
 
-    ofSetColor(LoColores[colorindex]);
-    // ofSetColor(ofColor::green);
+    ofSetColor(LoColores[colorindex]); // Que es esto?
     ofDrawCircle(px, py, 0.6);
     ofSetColor(ofColor::white);
 
@@ -214,9 +223,34 @@ void ofApp::drawMode4(float x, float y, float n) {
     else
         drawMode4(-0.15 * x + 0.28 * y, 0.26 * x + 0.24 * y + 0.44, n - 1);
 }
+
+void ofApp::drawmode5(float cx, float cy, float sizex, float sizey, float angle, int n, int colorindex){
+    vector<ofColor> colores = {ofColor::silver, ofColor::tomato, ofColor::turquoise, ofColor::goldenRod,ofColor::mediumPurple, 
+                               ofColor::silver, ofColor::tomato, ofColor::turquoise, ofColor::goldenRod,ofColor::mediumPurple, 
+                               ofColor::silver, ofColor::tomato, ofColor::turquoise, ofColor::goldenRod,ofColor::mediumPurple, 
+                               ofColor::silver, ofColor::tomato, ofColor::turquoise, ofColor::goldenRod,ofColor::mediumPurple, 
+                               ofColor::silver, ofColor::tomato, ofColor::turquoise, ofColor::goldenRod,ofColor::mediumPurple}; 
+    ofPushMatrix();
+    ofTranslate(cx,cy);
+    ofRotateDeg(angle);
+    if(n > 1){
+        drawmode5(-sizex/4, -sizey/4, sizex/2, sizey/2, 0, n-1, colorindex + 1 );
+        drawmode5(sizex/4, -sizey/4, sizex/2, sizey/2, 0, n-1, colorindex + 2);
+        drawmode5(-sizex/4, sizey/4, sizex/2, sizey/2, 90, n-1, colorindex + 3);
+        drawmode5(sizex/4, sizey/4, sizex/2, sizey/2, -90, n-1, colorindex + 4);
+    }
+    float shrink = pow(2,n+1);
+    ofSetColor(colores[colorindex]); 
+    ofDrawLine({(-sizex/shrink), - sizey/shrink},{(sizex/shrink), - sizey/shrink});
+    ofDrawLine({-(sizex/2-sizex/shrink), -(sizey/shrink)},{-(sizex/2-sizex/shrink), sizey/shrink});
+    ofDrawLine({(sizex/2-sizex/shrink), -(sizey/shrink)},{(sizex/2-sizex/shrink), sizey/shrink});
+    ofSetColor(ofColor::white);
+    ofPopMatrix();
+}
+
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-    if (key >= '1' && key <= '6'){
+    if (key >= '1' && key <= '7'){
         mode = key;
     }
     if(key == OF_KEY_RIGHT){
@@ -235,7 +269,10 @@ void ofApp::keyPressed(int key) {
         if(mode == '5' && lanieve.getDepth()<6){
             lanieve.setDepth(lanieve.getDepth()+1);
         }
-        if(mode == '6' && Triangulitos.getDepth()<9){
+        if(mode == '6' && dm5depth<6){
+            dm5depth++;
+        }  
+        if(mode == '7' && Triangulitos.getDepth()<9){
             Triangulitos.setdepth(Triangulitos.getDepth()+1);
         }                
     }
@@ -256,7 +293,10 @@ void ofApp::keyPressed(int key) {
         if(mode == '5' && lanieve.getDepth()>1){
             lanieve.setDepth(lanieve.getDepth()-1);
         }
-        if(mode == '6' && Triangulitos.getDepth()>0){
+        if(mode == '6' && dm5depth>1){
+            dm5depth--;
+        }  
+        if(mode == '7' && Triangulitos.getDepth()>0){
             Triangulitos.setdepth(Triangulitos.getDepth()-1);
         }   
     }

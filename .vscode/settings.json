@@ -16,6 +16,8 @@
     },
     "terminal.explorerKind": "external",
     "files.associations": {
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "chrono": "cpp",
+        "regex": "cpp"
     },
 }

@@ -30,6 +30,7 @@ void Fractal3D::draw(map<string, float> drawConfig) {
         reset();
         mesh.setMode(OF_PRIMITIVE_TRIANGLES);
         generateTetrahedron(base, peak, drawConfig["n"]);
+
         mesh.setupIndicesAuto();
         currentMeshHasDetail = extrudeAllFaces;
     }
@@ -47,9 +48,15 @@ void Fractal3D::draw(map<string, float> drawConfig) {
     ofDisableDepthTest();
     cam->end();
 
+
 }
 
 void Fractal3D::generateTetrahedron(vector<vec3>& base, vec3 peak, int n) {
+    vector<ofColor> colores = {ofColor::coral, ofColor::lightPink, ofColor::lightYellow, ofColor::teal, ofColor::lightYellow,
+                               ofColor::mediumOrchid, ofColor::lightYellow, ofColor::cornflowerBlue, ofColor::lightYellow, ofColor::sandyBrown,
+                               ofColor::lightYellow,ofColor::slateGray,ofColor::lightYellow,ofColor::burlyWood,ofColor::lightYellow,
+                               ofColor::turquoise,ofColor::lightYellow,ofColor::indianRed, ofColor::lightYellow};
+   
     if (!n) return;
     // The base of our tetrahedron will be the midpoints of the base of its parent
     vec3 midpointA = (base[0] + base[1]) / 2;
@@ -112,16 +119,25 @@ void Fractal3D::generateTetrahedron(vector<vec3>& base, vec3 peak, int n) {
 
     // Now we add the faces that are not the base of the new tetrahedron to the mesh. We don't add the base because the parent's face is already being drawn.
     mesh.addVertex(midpointA);
+    mesh.addColor(colores[2*n-1]);
     mesh.addVertex(midpointB);
+    mesh.addColor(colores[2*n-1]);
     mesh.addVertex(peak);
+    mesh.addColor(colores[2*n]);
     
     mesh.addVertex(midpointA);
+    mesh.addColor(colores[2*n-1]);
     mesh.addVertex(midpointC);
+    mesh.addColor(colores[2*n-1]);
     mesh.addVertex(peak);
+    mesh.addColor(colores[2*n]);
 
     mesh.addVertex(midpointB);
+    mesh.addColor(colores[2*n-1]);
     mesh.addVertex(midpointC);
+    mesh.addColor(colores[2*n-1]);
     mesh.addVertex(peak);
+    mesh.addColor(colores[2*n]);
 
     generateTetrahedron(base1, peak1, n - 1);
     generateTetrahedron(base2, peak2, n - 1);
