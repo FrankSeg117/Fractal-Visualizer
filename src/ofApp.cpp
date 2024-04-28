@@ -27,7 +27,7 @@ void ofApp::draw() {
 
     ofNoFill();
         Fractals[index-1]->draw();
-        Fractals[index-1]->update(); //instead of using static_cast to increase angle, we use an update method for it
+        Fractals[index-1]->update(); //instead of using static_cast to increase angle of the circle fractal, we use a general update method for it
         text.drawString(Fractals[index-1]->getName(),25,60);
 
     if(debug){
