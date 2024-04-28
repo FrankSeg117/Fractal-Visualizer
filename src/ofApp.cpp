@@ -14,6 +14,7 @@ void ofApp::setup() {
     Fractals.push_back(new Fern("Barnsley Fern", 10));
     Fractals.push_back(new SnowFlake("Koch SnowFlake", 2));
     Fractals.push_back(new Fractal3D("3D Fractal", 3, &cam));
+    Fractals.push_back(new HilbertCurve("Hilbert Curve",1));
 }
 
 //--------------------------------------------------------------
@@ -37,10 +38,11 @@ void ofApp::draw() {
        dataText.drawString("4.Barnsley Level: " + to_string(Fractals[3]->getLevel()),25,420); 
        dataText.drawString("5.SnowFlake Level: " + to_string(Fractals[4]->getLevel()),25,480); 
        dataText.drawString("6.3D Fractal Level: " + to_string(Fractals[5]->getLevel()),25,540); 
+       dataText.drawString("7.Hilbert Curve: " + to_string(Fractals[6]->getLevel()),25,600); 
     	
        // Información de como subir los niveles
-       dataText.drawString("Press Right Arrow to Level up the Recursion",950,60);
-       dataText.drawString("Press Left Arrow to Level down the Recursion",957,120);
+       dataText.drawString("Press Right Arrow to Level up the Recursion",ofGetWindowWidth()*0.6875,ofGetWindowHeight()*0.0375);
+       dataText.drawString("Press Left Arrow to Level up the Recursion",ofGetWindowWidth()*0.6875,ofGetWindowHeight()*0.075);
        
     }
 }

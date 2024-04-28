@@ -33,6 +33,6 @@ class Circle : public AbstractFractal {
     void setAngle(float angle){ this->angle = angle;}
     float getAngle(){return this->angle;}
 
-    vector<ofColor> colores = {ofColor::blue, ofColor::red, ofColor::green, ofColor::yellow, ofColor::cyan};
+    vector<ofColor> colores = {ofColor::springGreen, ofColor::turquoise, ofColor::lightGoldenRodYellow, ofColor::hotPink, ofColor::cyan};
 
 };

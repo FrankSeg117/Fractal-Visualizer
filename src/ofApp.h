@@ -9,6 +9,7 @@
 #include "Fern.h"
 #include "SnowFlake.h"
 #include "Fractal3D.h"
+#include "HilbertCurve.h"
 
 class ofApp : public ofBaseApp {
   private:
