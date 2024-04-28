@@ -1,12 +1,6 @@
 #include "SnowFlake.h"
 
-SnowFlake::SnowFlake() {
-}
-
-SnowFlake::SnowFlake(glm::vec2 start, glm::vec2 end) {
-    this->start = start;
-    this->end = end;
-}
+void SnowFlake::update(){}
 
 void SnowFlake::draw() {
     float size = 0.74 * ofGetHeight();
@@ -15,13 +9,11 @@ void SnowFlake::draw() {
     glm::vec2 p2 = {(ofGetWidth() + size) / 2, (ofGetHeight() - size * sin(PI / 3)) / 2 + 0.15 * size};
     glm::vec2 p3 = {ofGetWidth() / 2, (ofGetHeight() + size * sin(PI / 3)) / 2 + 0.15 * size};
 
-    draw(SFdrawdepth, new SnowFlake(p1, p2),0);
-    draw(SFdrawdepth, new SnowFlake(p2, p3),0);
-    draw(SFdrawdepth, new SnowFlake(p3, p1),0);
-    // draw(3, new SnowFlake(p1, p2));
-    // draw(3, new SnowFlake(p2, p3));
-    // draw(3, new SnowFlake(p3, p1));
+    draw(level, new SnowFlake(p1, p2),0);
+    draw(level, new SnowFlake(p2, p3),0);
+    draw(level, new SnowFlake(p3, p1),0);
 }
+
 void SnowFlake::draw(int n, SnowFlake *flake,int colorindex) {
     if (n < 2){
         ofSetColor(colors[colorindex]);

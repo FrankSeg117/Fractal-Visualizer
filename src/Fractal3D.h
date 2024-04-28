@@ -1,33 +1,40 @@
 #pragma once
 
 #include "ofMain.h"
+#include "AbstractFractal.h"
 
 using namespace glm;
 
-class Fractal3D {
-    private:
+class Fractal3D : public AbstractFractal{
+    protected:
         ofMesh mesh;
         ofEasyCam* cam;
         bool currentMeshHasDetail = false;
         bool extrudeAllFaces = false;
-        int depth;
-    
     public:
-        //Constructor predet
-        Fractal3D() : cam(nullptr){this->depth=3;}
-
-        //setter de el OFezcam para cuando se inicializa sin cam
-        void setcam(ofEasyCam* Newcam){this->cam=Newcam;}
-
-        Fractal3D(ofEasyCam* cam);
+        //Constructor 
+        Fractal3D(string name, int level, ofEasyCam* cam) : AbstractFractal(name, level), cam(cam) {}
+   
         ~Fractal3D();
 
         vec3 centerOf(vector<vec3>& points);
 
-        void setdepth(int depth3D){this->depth=depth3D;reset();}
-        int getDepth(){return this->depth;}
-
+        void update();
+        void draw();
         void draw(map<string, float>);
+
+        virtual void increaseLevel(){
+            if(this->getLevel()<9){
+                this->setLevel(this->getLevel()+1);
+                reset();
+            }
+        }
+        virtual void decreaseLevel(){
+            if(this->getLevel()>0){
+                this->setLevel(this->getLevel()-1);
+                reset();
+            }
+        }
         void generateTetrahedron(vector<vec3>& base, vec3 peak, int n);
         void reset();
         map<string, float> getDefaultConfig();

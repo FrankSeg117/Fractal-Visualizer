@@ -3,31 +3,50 @@
 #include "ofMain.h"
 #include <cmath>
 
+#include "AbstractFractal.h"
+
 /**
  * @brief Koch SnowFlake Fractal
  *
  */
 
-class SnowFlake {
+class SnowFlake : public AbstractFractal{
   private:
     glm::vec2 start;
     glm::vec2 end;
 
-    int SFdrawdepth = 5;
+    // int SFdrawdepth = 5;
   public:
-    SnowFlake();
-    SnowFlake(glm::vec2 start, glm::vec2 end);
+    //Overloaded Constructors
+    SnowFlake() {}
+    SnowFlake(string name, int level) : AbstractFractal(name, level){}
+    SnowFlake(glm::vec2 start, glm::vec2 end) {
+        this->start = start;
+        this->end = end;
+    }
+    //Deconstructor
+    virtual ~SnowFlake() {}
 
+    //Methods for draw
     glm::vec2 getStart() const { return start; }
     glm::vec2 getEnd() const { return end; }
     void setStart(glm::vec2 start) { this->start = start; }
     void setEnd(glm::vec2 end) { this->end = end; }
 
-    void setDepth(int depth){this->SFdrawdepth=depth;}
-    int getDepth(){return this->SFdrawdepth;}
-
+    // void setLevel(int depth){this->SFdrawdepth=depth;}
+    // int getDepth(){return this->SFdrawdepth;}
+    void update();
     void draw();
     void draw(int n, SnowFlake *flake,int colorindex);
+
+    virtual void increaseLevel(){
+        if(this->getLevel()<6){
+        this->setLevel(this->getLevel()+1);}
+        }
+    virtual void decreaseLevel(){
+        if(this->getLevel()>1){
+        this->setLevel(this->getLevel()-1);}
+    }
 
     glm::vec2 getA();
     glm::vec2 getB();
@@ -35,20 +54,20 @@ class SnowFlake {
     glm::vec2 getD();
     glm::vec2 getE();
 
-vector<ofColor> colors = {
-    ofColor::blue,               
-    ofColor::cornflowerBlue,     
-    ofColor::deepSkyBlue,        
-    ofColor::dodgerBlue,         
-    ofColor::lightSkyBlue,       
-    ofColor::mediumTurquoise,
-    ofColor::skyBlue,             
-    ofColor::steelBlue,           
-    ofColor::royalBlue,           
-    ofColor::powderBlue,          
-    ofColor::lightSteelBlue,      
-    ofColor::turquoise             
-};
+    vector<ofColor> colors = {
+        ofColor::blue,               
+        ofColor::cornflowerBlue,     
+        ofColor::deepSkyBlue,        
+        ofColor::dodgerBlue,         
+        ofColor::lightSkyBlue,       
+        ofColor::mediumTurquoise,
+        ofColor::skyBlue,             
+        ofColor::steelBlue,           
+        ofColor::royalBlue,           
+        ofColor::powderBlue,          
+        ofColor::lightSteelBlue,      
+        ofColor::turquoise             
+    };
 
 
 
