@@ -22,11 +22,7 @@ void ofApp::update() {
     Fractals[index-1]->update(); //instead of using static_cast to increase angle, we use an update method for it
     if(animation){
         if(startAnimation || (Fractals[index-1]->getLevel() == Fractals[index-1]->getMaxLevel() && animationCounter%150 == 0 )){
-            if(Fractals[index-1]->getName() == "3D Fractal"){
-                this->Fractals[index-1]->setLevel(this->Fractals[index-1]->getMinLevel()-1);
-            }else{
-                this->Fractals[index-1]->setLevel(this->Fractals[index-1]->getMinLevel());
-            }
+            this->Fractals[index-1]->setLevel(this->Fractals[index-1]->getMinLevel());
             startAnimation = false;
         }
         animationCounter++;
