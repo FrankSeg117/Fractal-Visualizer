@@ -42,13 +42,9 @@ void ofApp::draw() {
 
     if(debug){
         // Levels of different shapes
-       dataText.drawString("1.Circle Level: " + to_string(Fractals[0]->getLevel()),25,240); 
-       dataText.drawString("2.Tree Level: " + to_string(Fractals[1]->getLevel()),25,300); 
-       dataText.drawString("3.Triangle Level: " + to_string(Fractals[2]->getLevel()),25,360); 
-       dataText.drawString("4.Barnsley Level: " + to_string(Fractals[3]->getLevel()),25,420); 
-       dataText.drawString("5.SnowFlake Level: " + to_string(Fractals[4]->getLevel()),25,480); 
-       dataText.drawString("6.3D Fractal Level: " + to_string(Fractals[5]->getLevel()),25,540); 
-       dataText.drawString("7.Hilbert Curve: " + to_string(Fractals[6]->getLevel()),25,600); 
+        for(int i = 1; i <=7; i++){
+            dataText.drawString(to_string(i) +"." + Fractals[i-1]->getName() + ": " + to_string(Fractals[i-1]->getLevel()),25,240+60*(i-1)); 
+        } 
     	
        // Información de como subir los niveles
        dataText.drawString("Press Right Arrow to Level up the Recursion",ofGetWindowWidth()*0.6875,ofGetWindowHeight()*0.0375);
