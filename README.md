@@ -23,4 +23,9 @@ Any project that doesn't compile will receive a 0.
 If a partner has no commits in the repositories, they'll will receive a 0.
 
 ## Student Notes
-If you have any notes to add for your TA about the project specs or creative additions, you may do so in this section of the README:
+   ***As a basis for the correct functionality of the code, whenever an animation is running; any key presses will stop the animation.
+        This was done in order to prevent any sort of bug while the application is running.
+Bonus:
+     - Added colors to the recursions of the 3D fractal
+     - Added brand new fractal, resembling an eagle taking flight
+     - Condensed much of the code
