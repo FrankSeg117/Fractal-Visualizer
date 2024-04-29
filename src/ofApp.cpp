@@ -53,6 +53,7 @@ void ofApp::draw() {
        // Información de como subir los niveles
        dataText.drawString("Press Right Arrow to Level up the Recursion",ofGetWindowWidth()*0.6875,ofGetWindowHeight()*0.0375);
        dataText.drawString("Press Left Arrow to Level down the Recursion",ofGetWindowWidth()*0.6875,ofGetWindowHeight()*0.075);
+       dataText.drawString("Press Left Arrow to Level down the Recursion",ofGetWindowWidth()*0.6875,ofGetWindowHeight()*0.075);
        
     }
 }
