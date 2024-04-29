@@ -19,7 +19,7 @@ class SnowFlake : public AbstractFractal{
   public:
     //Overloaded Constructors
     SnowFlake() {}
-    SnowFlake(string name, int level) : AbstractFractal(name, level){}
+    SnowFlake(string name, int level, int maxLevel, int minLevel, int animationSpeed) : AbstractFractal(name, level, maxLevel, minLevel, animationSpeed){}
     SnowFlake(glm::vec2 start, glm::vec2 end) {
         this->start = start;
         this->end = end;
@@ -40,11 +40,11 @@ class SnowFlake : public AbstractFractal{
     void draw(int n, SnowFlake *flake,int colorindex);
 
     virtual void increaseLevel(){
-        if(this->getLevel()<6){
+        if(this->getLevel()<this->getMaxLevel()){
         this->setLevel(this->getLevel()+1);}
         }
     virtual void decreaseLevel(){
-        if(this->getLevel()>1){
+        if(this->getLevel()>this->getMinLevel()){
         this->setLevel(this->getLevel()-1);}
     }
 

@@ -13,7 +13,7 @@ class Fractal3D : public AbstractFractal{
         bool extrudeAllFaces = false;
     public:
         //Constructor 
-        Fractal3D(string name, int level, ofEasyCam* cam) : AbstractFractal(name, level), cam(cam) {}
+        Fractal3D(string name, int level, int maxLevel, int minLevel, int animationSpeed, ofEasyCam* cam) : AbstractFractal(name, level, maxLevel, minLevel, animationSpeed), cam(cam) {}
    
         ~Fractal3D();
 
@@ -24,13 +24,13 @@ class Fractal3D : public AbstractFractal{
         void draw(map<string, float>);
 
         virtual void increaseLevel(){
-            if(this->getLevel()<9){
+            if(this->getLevel()<this->getMaxLevel()){
                 this->setLevel(this->getLevel()+1);
                 reset();
             }
         }
         virtual void decreaseLevel(){
-            if(this->getLevel()>0){
+            if(this->getLevel()>this->getMinLevel()){
                 this->setLevel(this->getLevel()-1);
                 reset();
             }

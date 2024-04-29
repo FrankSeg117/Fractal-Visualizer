@@ -11,9 +11,9 @@ class Circle : public AbstractFractal {
 
     public:
 
-    Circle(string name, int level) : AbstractFractal(name, level){}
+    Circle(string name, int level, int maxLevel, int minLevel, int animationSpeed) : AbstractFractal(name, level, maxLevel, minLevel, animationSpeed){}
 
-    Circle(string name, int level, float angle, float r) : AbstractFractal(name, level){
+    Circle(string name, int level, int maxLevel, int minLevel, int animationSpeed, float angle, float r) : AbstractFractal(name, level, maxLevel, minLevel, animationSpeed){
         this->angle = angle;
         this->r = r;
     }
@@ -23,11 +23,11 @@ class Circle : public AbstractFractal {
     virtual void draw(float x, float y, float r, int level, int colorindex);
 
     virtual void increaseLevel(){
-        if(this->getLevel()<5){
+        if(this->getLevel()<this->getMaxLevel()){
         this->setLevel(this->getLevel()+1);}
         }
     virtual void decreaseLevel(){
-        if(this->getLevel()>1){
+        if(this->getLevel()>this->getMinLevel()){
         this->setLevel(this->getLevel()-1);}
     }
     void setAngle(float angle){ this->angle = angle;}

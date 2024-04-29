@@ -8,17 +8,28 @@ void ofApp::setup() {
     text.load("Fonts/fractalFont.otf",40);
     dataText.load("Fonts/fractalFont.otf",23);
 
-    Fractals.push_back(new Circle("Circle Fractal", 2));
-    Fractals.push_back(new Tree("Tree Fractal", 1));
-    Fractals.push_back(new Triangle("Triangle Fractal", 2));
-    Fractals.push_back(new Fern("Barnsley Fern", 10));
-    Fractals.push_back(new SnowFlake("Koch SnowFlake", 2));
-    Fractals.push_back(new Fractal3D("3D Fractal", 3, &cam));
-    Fractals.push_back(new HilbertCurve("Hilbert Curve",1));
+    Fractals.push_back(new Circle("Circle Fractal", 2,5,1,50));
+    Fractals.push_back(new Tree("Tree Fractal", 1,15,1,25));
+    Fractals.push_back(new Triangle("Triangle Fractal", 2,10,1,25));
+    Fractals.push_back(new Fern("Barnsley Fern", 10,50,5,25));
+    Fractals.push_back(new SnowFlake("Koch SnowFlake", 2,6,1,25));
+    Fractals.push_back(new Fractal3D("3D Fractal", 3, 9, 0, 25, &cam));
+    Fractals.push_back(new HilbertCurve("Hilbert Curve",2,6,1,50));
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
+    Fractals[index-1]->update(); //instead of using static_cast to increase angle, we use an update method for it
+    if(animation){
+        if(startAnimation || (Fractals[index-1]->getLevel() == Fractals[index-1]->getMaxLevel() && animationCounter%150 == 0 )){
+            this->Fractals[index-1]->setLevel(this->Fractals[index-1]->getMinLevel());
+            startAnimation = false;
+        }
+        animationCounter++;
+        if(animationCounter%this->Fractals[index-1]->getAnimationSpeed() == 0){
+            this->Fractals[index-1]->increaseLevel();
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -26,9 +37,8 @@ void ofApp::draw() {
     ofBackgroundGradient(ofColor(65), ofColor(0), OF_GRADIENT_BAR);
 
     ofNoFill();
-        Fractals[index-1]->draw();
-        Fractals[index-1]->update(); //instead of using static_cast to increase angle, we use an update method for it
-        text.drawString(Fractals[index-1]->getName(),25,60);
+    Fractals[index-1]->draw();
+    text.drawString(Fractals[index-1]->getName(),25,60);
 
     if(debug){
         // Levels of different shapes
@@ -42,7 +52,7 @@ void ofApp::draw() {
     	
        // Información de como subir los niveles
        dataText.drawString("Press Right Arrow to Level up the Recursion",ofGetWindowWidth()*0.6875,ofGetWindowHeight()*0.0375);
-       dataText.drawString("Press Left Arrow to Level up the Recursion",ofGetWindowWidth()*0.6875,ofGetWindowHeight()*0.075);
+       dataText.drawString("Press Left Arrow to Level down the Recursion",ofGetWindowWidth()*0.6875,ofGetWindowHeight()*0.075);
        
     }
 }
@@ -63,6 +73,16 @@ void ofApp::keyPressed(int key) {
     }
     if(tolower(key) == 'd'){
         debug = !debug;
+    }
+    if(key == ' '){
+        animation = !animation;
+        startAnimation = true; 
+        animationCounter = 0;
+    }
+    else{
+        animation = false;
+        startAnimation = false; 
+        animationCounter = 0;
     }
 }
 

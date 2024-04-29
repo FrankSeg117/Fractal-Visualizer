@@ -9,18 +9,18 @@ class Triangle : public AbstractFractal {
 
     public:
 
-    Triangle(string name, int level) : AbstractFractal(name, level){}
+    Triangle(string name, int level, int maxLevel, int minLevel, int animationSpeed) : AbstractFractal(name, level, maxLevel, minLevel, animationSpeed){}
 
     virtual void update();
     virtual void draw();
     virtual void draw(float x, float y, float size, int n, int colorindex);
 
     virtual void increaseLevel(){
-        if(this->getLevel()<10){
+        if(this->getLevel()<this->getMaxLevel()){
         this->setLevel(this->getLevel()+1);}
         }
     virtual void decreaseLevel(){
-        if(this->getLevel()>1){
+        if(this->getLevel()>this->getMinLevel()){
         this->setLevel(this->getLevel()-1);}
     }
 

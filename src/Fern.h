@@ -9,18 +9,18 @@ class Fern : public AbstractFractal {
 
     public:
 
-    Fern(string name, int level) : AbstractFractal(name, level){}
+    Fern(string name, int level, int maxLevel, int minLevel, int animationSpeed) : AbstractFractal(name, level, maxLevel, minLevel, animationSpeed){}
 
     virtual void update();
     virtual void draw();
     virtual void draw(float x, float y, float n);
 
     virtual void increaseLevel(){
-        if(this->getLevel()<50){
+        if(this->getLevel()<this->getMaxLevel()){
         this->setLevel(this->getLevel()+5);}
         }
     virtual void decreaseLevel(){
-        if(this->getLevel()>5){
+        if(this->getLevel()>this->getMinLevel()){
         this->setLevel(this->getLevel()-5);}
     }
 

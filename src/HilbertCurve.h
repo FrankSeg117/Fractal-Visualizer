@@ -7,18 +7,18 @@ class HilbertCurve : public AbstractFractal {
 
     public:
 
-    HilbertCurve(string name, int level) : AbstractFractal(name, level){}
+    HilbertCurve(string name, int level, int maxLevel, int minLevel, int animationSpeed) : AbstractFractal(name, level, maxLevel, minLevel, animationSpeed){}
 
     virtual void update();
     virtual void draw();
     virtual void draw(float cx, float cy, float sizex, float sizey, int angle, int n, int colorindex);
 
     virtual void increaseLevel(){
-        if(this->getLevel()<6){
+        if(this->getLevel()<this->getMaxLevel()){
         this->setLevel(this->getLevel()+1);}
         }
     virtual void decreaseLevel(){
-        if(this->getLevel()>1){
+        if(this->getLevel()>this->getMinLevel()){
         this->setLevel(this->getLevel()-1);}
     }
 

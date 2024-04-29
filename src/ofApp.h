@@ -42,4 +42,7 @@ class ofApp : public ofBaseApp {
     ofTrueTypeFont dataText;
 
     bool debug = false;//Toggle with 'D'// Utilizado para saber cuando se requiere enseñar la información de "debugging"
+    bool animation = false;
+    bool startAnimation = false;
+    int animationCounter = 0;
 };
