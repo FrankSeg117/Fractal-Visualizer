@@ -19,10 +19,15 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
-    Fractals[index-1]->update(); //instead of using static_cast to increase angle, we use an update method for it
+    if(this->Fractals[index-1]->getName() != "3D Fractal"){
+            Fractals[index-1]->update(); //instead of using static_cast to increase angle, we use an update method for it
+    }
     if(animation){
         if(startAnimation || (Fractals[index-1]->getLevel() == Fractals[index-1]->getMaxLevel() && animationCounter%150 == 0 )){
             this->Fractals[index-1]->setLevel(this->Fractals[index-1]->getMinLevel());
+            if(this->Fractals[index-1]->getName() == "3D Fractal"){
+                Fractals[index-1]->update();
+            }
             startAnimation = false;
         }
         animationCounter++;

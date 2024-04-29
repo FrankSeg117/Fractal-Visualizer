@@ -12,7 +12,9 @@ vec3 Fractal3D::centerOf(vector<vec3>& points) {
     result /= points.size();
     return result;
 }
-void Fractal3D::update(){}
+void Fractal3D::update(){
+    reset();
+}
 
 void Fractal3D::draw(){
     draw({{"n", level}, {"scale", 100}});
