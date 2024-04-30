@@ -10,6 +10,7 @@
 #include "SnowFlake.h"
 #include "Fractal3D.h"
 #include "HilbertCurve.h"
+#include "bird.h"
 
 class ofApp : public ofBaseApp {
   private:
@@ -33,7 +34,7 @@ class ofApp : public ofBaseApp {
     void gotMessage(ofMessage msg);
 
     void drawMode4(float x, float y, float n);
-    void drawmode5(float cx, float cy, float sizex, float sizey, float angle, int n, int colorindex);
+    void drawmode5(int n, int colorindex);
 
     vector<Fractal*> Fractals;
 

@@ -15,6 +15,7 @@ void ofApp::setup() {
     Fractals.push_back(new SnowFlake("Koch SnowFlake", 2,6,1,25));
     Fractals.push_back(new Fractal3D("3D Fractal", 3, 9, 0, 25, &cam));
     Fractals.push_back(new HilbertCurve("Hilbert Curve",2,6,1,50));
+    Fractals.push_back(new Bird("Eagle",-20'000,-20'000,20'000, 12));
 }
 
 //--------------------------------------------------------------
@@ -35,6 +36,7 @@ void ofApp::update() {
             this->Fractals[index-1]->increaseLevel();
         }
     }
+
 }
 
 //--------------------------------------------------------------
@@ -44,10 +46,10 @@ void ofApp::draw() {
     ofNoFill();
     Fractals[index-1]->draw();
     text.drawString(Fractals[index-1]->getName(),25,60);
-
+    
     if(debug){
         // Levels of different shapes
-        for(int i = 1; i <=7; i++){
+        for(int i = 1; i <=8; i++){
             dataText.drawString(to_string(i) +"." + Fractals[i-1]->getName() + ": " + to_string(Fractals[i-1]->getLevel()),25,240+60*(i-1)); 
         } 
     	
@@ -56,11 +58,13 @@ void ofApp::draw() {
        dataText.drawString("Press Left Arrow to Level down the Recursion",ofGetWindowWidth()*0.6875,ofGetWindowHeight()*0.075);
        
     }
+
+
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-    if (key >= '1' && key <= '7'){
+    if (key >= '1' && key <= '8'){
         mode = key;
         index = key - '0'; //Convertimos el character a int
     }
