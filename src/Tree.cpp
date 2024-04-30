@@ -4,9 +4,9 @@ void Tree::update(){}
 
 void Tree::draw(){
 
-    draw(ofGetWidth() / 2, ofGetHeight() - 20, level, length, 1.5 * PI,0);
-    draw(ofGetWidth() / 2 + 700, ofGetHeight() + 100, level, length/2, 1.5 * PI,0);
-    draw(ofGetWidth() / 2 - 700, ofGetHeight() + 100, level, length/2, 1.5 * PI,0);
+    draw(ofGetWidth() / 2, ofGetHeight() - 180, level, length, 1.5 * PI,0);
+    draw(ofGetWidth() / 2 + 500, ofGetHeight() - 60, level, length/2, 1.5 * PI,0);
+    draw(ofGetWidth() / 2 - 500, ofGetHeight() - 60, level, length/2, 1.5 * PI,0);
 }
 
 void Tree::draw(float x, float y, int n, float length, float rad, int colorindex){
