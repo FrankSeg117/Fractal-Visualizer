@@ -5,7 +5,7 @@
 
 class Tree : public AbstractFractal {
     protected:
-        float length = 0.31 * ofGetHeight();
+        float length = 0.21 * ofGetHeight();
 
     public:
 
